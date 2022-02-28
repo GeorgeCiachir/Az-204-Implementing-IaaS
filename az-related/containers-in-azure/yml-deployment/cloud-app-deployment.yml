@@ -1,0 +1,64 @@
+apiVersion: 2021-09-01
+location: westeurope
+name: greeting-app
+properties:
+  containers:
+    - name: greeting-app-container
+      properties:
+        environmentVariables:
+          - name: 'APP_SETTINGS_DEFAULT_HTML_LOCATION'
+            value: '/application/templates'
+          - name: 'APP_SETTINGS_HTML_LOCATION'
+            value: '/app-volume'
+          - name: 'APP_SETTINGS_SETTINGS_LOCATION'
+            value: '/app-settings'
+          - name: 'APP_SETTINGS_SECRETS_LOCATION'
+            value: '/app-secrets'
+          - name: 'CONFIG_MAP_SETTINGS_otherSetting'
+            value: '3'
+          - name: 'SECRET_APP_DB_PASSWORD'
+            secureValue: 'cGFyb2xhX2FwcGxpY2F0aWVp'
+        image: georgeciachir/small-app:3.0
+        ports:
+          - port: 8080
+            protocol: TCP
+        resources:
+          requests:
+            cpu: 1.0
+            memoryInGB: 1.5
+        volumeMounts:
+          - mountPath: /app-volume
+            name: htmlFilesVolume
+          - mountPath: /app-settings
+            name: settingsVolume
+          - mountPath: /app-secrets
+            name: secretsVolume
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+      - protocol: tcp
+        port: 8080
+    dnsNameLabel: greeting-app
+  volumes:
+    - name: htmlFilesVolume
+      azureFile:
+        shareName: share1
+        readOnly: false
+        storageAccountName: appstorageciachir
+        storageAccountKey: iUorJ/I6cT656WpbfDJGyR25ucRzDS2dOtQtg0I/0Ca00cnxgmxIl1hnPbN+Mpt+Z9vxBjP27MMoJo3SpfiiFw==
+    - name: settingsVolume
+      azureFile:
+        shareName: share2
+        readOnly: false
+        storageAccountName: appstorageciachir
+        storageAccountKey: iUorJ/I6cT656WpbfDJGyR25ucRzDS2dOtQtg0I/0Ca00cnxgmxIl1hnPbN+Mpt+Z9vxBjP27MMoJo3SpfiiFw==
+    - name: secretsVolume
+      azureFile:
+        shareName: share3
+        readOnly: false
+        storageAccountName: appstorageciachir
+        storageAccountKey: iUorJ/I6cT656WpbfDJGyR25ucRzDS2dOtQtg0I/0Ca00cnxgmxIl1hnPbN+Mpt+Z9vxBjP27MMoJo3SpfiiFw==
+  restartPolicy: Always
+tags: null
+type: Microsoft.ContainerInstance/containerGroups

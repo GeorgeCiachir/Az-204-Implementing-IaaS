@@ -1,0 +1,56 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "availabilityZones": {
+            "value": []
+        },
+        "containerName": {
+            "value": "greeting-app-container"
+        },
+        "location": {
+            "value": "westeurope"
+        },
+        "imageType": {
+            "value": "Private"
+        },
+        "imageName": {
+            "value": "georgeciachirregistry.azurecr.io/azure-iaas-container:1.0"
+        },
+        "osType": {
+            "value": "Linux"
+        },
+        "numberCpuCores": {
+            "value": "1"
+        },
+        "memory": {
+            "value": "1.5"
+        },
+        "restartPolicy": {
+            "value": "OnFailure"
+        },
+        "imageRegistryLoginServer": {
+            "value": "georgeciachirregistry.azurecr.io"
+        },
+        "imageUsername": {
+            "value": "georgeciachirregistry"
+        },
+        "imagePassword": {
+            "value": "56QVLGo=Wk929wUburbOf05Dvt9ZQZxH"
+        },
+        "ipAddressType": {
+            "value": "Public"
+        },
+        "ports": {
+            "value": [
+                {
+                    "port": "8080",
+                    "protocol": "TCP"
+                }
+            ]
+        },
+        "dnsNameLabel": {
+            "value": "greeting-app"
+        }
+    }
+}
