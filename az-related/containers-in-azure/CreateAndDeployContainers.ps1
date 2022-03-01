@@ -5,7 +5,7 @@ $ACR_NAME = 'georgeciachirregistry'
 
 ############# Login to Azure
 az login
-az account set --subscription "TestAccoount"
+az account set --subscription "TestAccount"
 
 ############# List the current resource groups table format
 az group list --output table

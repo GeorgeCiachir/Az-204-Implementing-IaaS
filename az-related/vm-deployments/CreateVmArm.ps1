@@ -1,9 +1,9 @@
 #Login
-Connect-AzAccount -SubscriptionName 'TestAccoount'
+Connect-AzAccount -SubscriptionName 'TestAccount'
 
 
 #Ensure you're pointed at your correct subscription
-Set-AzContext -SubscriptionName 'TestAccoount'
+Set-AzContext -SubscriptionName 'TestAccount'
 
 
 #If you resources already exist, you can use this to remove the resource group
