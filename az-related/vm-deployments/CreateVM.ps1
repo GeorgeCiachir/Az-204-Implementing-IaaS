@@ -1,10 +1,10 @@
 # Az Powershell documentation: https://docs.microsoft.com/en-us/powershell/module/az.accounts/?view=azps-7.2.0#accounts
 
 ############################################ Login ############################################
-Connect-AzAccount -SubscriptionName 'Azure subscription 1'
+Connect-AzAccount -SubscriptionName 'TestAccoount'
 
 ############################################ Verify I'm using the correct subscription ############################################
-Set-AzContext -SubscriptionName 'Azure subscription 1'
+Set-AzContext -SubscriptionName 'TestAccoount'
 
 ############################################ Create a resource group ############################################
 New-AzResourceGroup -Name "implementing-IaaS-RG" -Location "westeurope"

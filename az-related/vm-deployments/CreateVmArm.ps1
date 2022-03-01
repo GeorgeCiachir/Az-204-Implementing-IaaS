@@ -1,9 +1,9 @@
 #Login
-Connect-AzAccount -SubscriptionName 'Azure subscription 1'
+Connect-AzAccount -SubscriptionName 'TestAccoount'
 
 
 #Ensure you're pointed at your correct subscription
-Set-AzContext -SubscriptionName 'Azure subscription 1'
+Set-AzContext -SubscriptionName 'TestAccoount'
 
 
 #If you resources already exist, you can use this to remove the resource group

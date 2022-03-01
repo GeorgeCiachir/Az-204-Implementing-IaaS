@@ -2,7 +2,7 @@
 
 #Login to Azure
 az login
-az account set --subscription "Azure subscription 1"
+az account set --subscription "TestAccoount"
 
 #List the current resource groups table format
 az group list --output table
@@ -37,7 +37,7 @@ az vm list-ip-addresses \
 
 #Login to Azure
 az login
-az account set --subscription "Azure subscription 1"
+az account set --subscription "TestAccoount"
 
 #List the current resource groups table format
 az group list --output table
