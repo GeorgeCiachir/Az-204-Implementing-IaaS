@@ -1,4 +1,7 @@
 #################################################### Create an ACR, a Docker image and push to the registry
+#############
+#############
+#############
 ############# Define a registry name
 # in docker hub I have it as georgeciahir
 $ACR_NAME = 'georgeciachirregistry'
@@ -45,7 +48,7 @@ az acr repository show-tags --name $ACR_NAME --repository azure-iaas-container -
 #################################################### Create a service principal (couldn't manage to make it work)
 #############
 #############
-
+#############
 $ACR_REGISTRY_ID = $(az acr show --name $ACR_NAME --query id --output tsv)
 $ACR_LOGINSERVER = $(az acr show --name $ACR_NAME --query loginServer --output tsv)
 
@@ -63,7 +66,8 @@ $SP_APPID = $(az ad sp show `
     --query appId `
     --output tsv)
 
-#################################################### CLI - Deploying a container from ACR in ACI (Azure Container Instances)
+#################################################### Deploying a container from ACR in ACI (Azure Container Instances)
+#############
 #############
 #############
 
@@ -79,20 +83,11 @@ az container create `
     --registry-username $SP_APPID `
     --registry-password $SP_PASSWORD
 
-#################################################### Azure Portal - Deploying a container from ACR in ACI (Azure Container Instances)
+
+#################################################### Deploying a container using YAML
 #############
 #############
-# When deploying from the portal we must first enable the admin user on the ACR (settings/access keys)
-
-#################################################### ARM template - Deploying a container using ARM template
-# of course, it can also be deployed using an ARM template
-New-AzResourceGroupDeployment `
-    -Name "ACI-deployment" `
-    -ResourceGroupName 'implementing-IaaS-RG' `
-    -TemplateFile './template/aci-template.json' `
-    -TemplateParameterFile './template/ACI-parameters.json'
-
-#################################################### ARM template - Deploying a container using YAML
+#############
 #### For this example, I'm using an image created in the Kubernetes PS courses: https://hub.docker.com/r/georgeciachir/small-app
 #### For additional info check out this repo: https://github.com/GeorgeCiachir/learning-k8s
 az container create `
@@ -101,7 +96,8 @@ az container create `
     --dns-name-label 'greeting-app'
 
 
-#################################################### CLI - Deploying a container from a public registry (e.g. Docker Hub)
+#################################################### Deploying a container from a public registry (e.g. Docker Hub)
+#############
 #############
 #############
 az container create `
@@ -112,20 +108,24 @@ az container create `
     --ports 8080
 
 
-
+#################################################### Show container info
+#############
+#############
+#############
 ############# Show the container info
 az container show --resource-group 'implementing-IaaS-RG' --name 'greeting-app-container'
 
 
 ############# Retrieve the URL, the format is [name].[region].azurecontainer.io
-$URL=$(az container show --resource-group 'implementing-IaaS-RG' --name 'greeting-app-container' --query ipAddress.fqdn | tr -d '"')
-echo "http://$URL"
+$URL=$(az container show --resource-group 'implementing-IaaS-RG' --name 'greeting-app-container' --query ipAddress.fqdn)
+# remove the " from the retrieved url
+# access the container on: http://$URL
 
-############# Clean resources
+
+#################################################### Clean resources
+#############
+#############
+#############
 az container delete `
     --resource-group 'implementing-IaaS-RG' `
     --name 'greeting-app-container'
-
-
-az acr run --registry 'georgeciachirregistry' `
-    --cmd '$Registry/azure-iaas-container:1.0' /dev/null
