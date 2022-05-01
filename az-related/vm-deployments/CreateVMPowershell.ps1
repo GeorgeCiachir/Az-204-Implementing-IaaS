@@ -29,7 +29,7 @@ New-AzVM `
 # Method 1
 # -> get all the Public Ip Addresses and try to match the VM by name (WinVM-ip most likely corresponds to the WinVM VM)
 Get-AzPublicIpAddress `
-    -ResourceGroupName 'implementing-IaaS-RG' `
+    -ResourceGroupName 'implementing-IaaS-RG'
 
 # Method 2
 # -> inspect the VirtualMachine object and get the NetworkInterfaces / Id
@@ -37,7 +37,8 @@ Get-AzPublicIpAddress `
 # -> in this case, WinVM470 is the Network interface name
 Get-AzVM  `
     -ResourceGroupName 'implementing-IaaS-RG' `
-    -Name 'WinVM' -DisplayHint 'Expand'
+    -Name 'WinVM' `
+    -DisplayHint 'Expand'
 
 # -> inspect the previously discovered network interface
 # -> get the name of the public ip object from IpConfigurations.PublicIpAddress.Name

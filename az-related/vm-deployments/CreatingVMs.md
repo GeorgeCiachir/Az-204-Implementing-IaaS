@@ -9,7 +9,7 @@
 ## This is the recommended way
 - Essentially, everything is an object in Azure
 - We can create deployments in Azure, using ARM templates and parameter files
-- These in turn can also be deployed in several ways:
+- The ARM templates can be deployed several ways:
     - Azure portal
     - Azure CLI (az)
     - Azure powershell (Powershell with Azure module)
@@ -17,20 +17,20 @@
     - Button in GitHub repository
     - Azure Cloud Shell
 - The template file
-  - Parameters - Provide values during deployment that allow the same template to be used with different environments
-  - Variables - Define values that are reused in your templates. They can be constructed from parameter values
-  - User-defined functions - Create customized functions that simplify your template
-  - Resources - Specify the resources to deploy
-  - Outputs - Return values from the deployed resources
-- The Azure API are versioned by date, so I can deploy the same ARM template over and over again to the same API by specifying it in the template:
+  - **Parameters** - Provide values during deployment that allow the same template to be used with different environments
+  - **Variables** - Define values that are reused in your templates. They can be constructed from parameter values
+  - **User-defined functions** - Create customized functions that simplify your template
+  - **Resources** - Specify the resources to deploy
+  - **Outputs** - Return values from the deployed resources
+- The Azure APIs are versioned by date, so I can deploy the same ARM template over and over again to the same API by specifying it in the template:
   - in the current template -> `"apiVersion": "2021-03-01"`
 - Resources can be also updated via templates -> if the template specifies creating a resource but that resource already exists, Azure Resource Manager performs an update instead of creating a new asset
 - Resources ca be deployed conditionally, using the "condition" function, in the "resources" template object
 
 ## Advantages of ARM templates
-- Declarative syntax -> You can deploy not only virtual machines, but also the network infrastructure, storage systems, and any other resources you may need
-- Repeatable results -> You can deploy the same template many times and get the same resource types in the same state
-- Orchestration -> The Resource Manager orchestrates the deployment of interdependent resources, so they're created in the correct order
+- **Declarative syntax** -> You can deploy not only virtual machines, but also the network infrastructure, storage systems, and any other resources you may need
+- **Repeatable results** -> You can deploy the same template many times and get the same resource types in the same state
+- **Orchestration** -> The Resource Manager orchestrates the deployment of interdependent resources, so they're created in the correct order
 
 ## A parent template can be defined, referencing other templates (essentially deploying an entire infrastructure in one go)
 ## These are called Nested templates
@@ -92,9 +92,9 @@ az deployment group create \
 - VM limits: The current limit on a per-subscription basis is 20 VMs per region
 
 ### Availability options
-- Availability zones
-- Availability sets
-- Virtual machine scale sets
+- [Availability zones](https://docs.microsoft.com/en-us/azure/availability-zones/az-overview?context=/azure/virtual-machines/context/context)
+- [Availability sets](https://docs.microsoft.com/en-us/azure/virtual-machines/availability-set-overview)
+- [Virtual machine scale sets](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview?context=/azure/virtual-machines/context/context)
 
 ### VM sizes (types) -> You can resize the VM
 - General Purpose -> Ideal for testing and development, small to medium databases, and low to medium traffic web servers
