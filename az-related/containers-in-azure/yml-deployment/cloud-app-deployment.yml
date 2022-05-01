@@ -20,7 +20,7 @@ properties:
             secureValue: 'cGFyb2xhX2FwcGxpY2F0aWVp'
         image: georgeciachir/small-app:3.0
         ports:
-          - port: 8080
+          - port: 80
             protocol: TCP
         resources:
           requests:
@@ -38,7 +38,7 @@ properties:
     type: Public
     ports:
       - protocol: tcp
-        port: 8080
+        port: 80
     dnsNameLabel: greeting-app
   volumes:
     - name: htmlFilesVolume

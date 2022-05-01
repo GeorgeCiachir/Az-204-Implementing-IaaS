@@ -45,17 +45,18 @@ az acr build --image "azure-iaas-container:1.0" --registry $ACR_NAME .
 az acr repository list --name $ACR_NAME --output table
 az acr repository show-tags --name $ACR_NAME --repository azure-iaas-container --output table
 
-#################################################### Create a service principal (couldn't manage to make it work)
+############# Create a service principal for ACI (couldn't manage to make it work) so that it can pull from ACR
 #############
 #############
 #############
+$ACR_NAME = 'georgeciachir'
 $ACR_REGISTRY_ID = $(az acr show --name $ACR_NAME --query id --output tsv)
 $ACR_LOGINSERVER = $(az acr show --name $ACR_NAME --query loginServer --output tsv)
 
 $SP_NAME = "acr-service-principal"
 
 $SP_PASSWORD = $(az ad sp create-for-rbac `
-    --name principalName `
+    --name $SP_NAME `
     --scopes $ACR_REGISTRY_ID `
     --role acrpull `
     --query password `
@@ -74,14 +75,14 @@ $SP_APPID = $(az ad sp show `
 $ACR_LOGINSERVER = $(az acr show --name $ACR_NAME --query loginServer --output tsv)
 
 az container create `
-    --resource-group "implementing-IaaS-RG" `
-    --name "greeting-app-container" `
-    --dns-name-label "greeting-app" `
-    --ports 8080 `
+    --resource-group "containers" `
+    --name "greeting-app3" `
+    --dns-name-label "greeting-app3" `
+    --ports 80 `
     --image $ACR_LOGINSERVER/azure-iaas-container:1.0 `
     --registry-login-server $ACR_LOGINSERVER `
-    --registry-username $SP_APPID `
-    --registry-password $SP_PASSWORD
+    --registry-username georgeciachir `
+    --registry-password pjT1XmVWUN8L6IwPPXhTjsJ/+oUHwCTq
 
 
 #################################################### Deploying a container using YAML
@@ -105,7 +106,7 @@ az container create `
     --name greeting-app-container `
     --dns-name-label greeting-app `
     --image georgeciachir/azure-iaas-container:1.0 `
-    --ports 8080
+    --ports 80
 
 
 #################################################### Show container info

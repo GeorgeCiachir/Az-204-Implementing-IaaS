@@ -17,6 +17,6 @@ public class SimpleGreetingController {
     @GetMapping(value = "/hello/{name}")
     public String sayHello(@PathVariable String name) {
         LOG.info("Greeting [{}]", name);
-        return String.format("Hello, %s", name);
+        return String.format("Hello, %s !", name);
     }
 }

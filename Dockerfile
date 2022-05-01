@@ -8,4 +8,4 @@ WORKDIR /application
 
 ENTRYPOINT [ "java", "-jar", "/application/app.jar" ]
 
-EXPOSE 8080
+EXPOSE 80
