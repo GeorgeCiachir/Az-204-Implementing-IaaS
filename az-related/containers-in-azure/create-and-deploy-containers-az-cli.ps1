@@ -82,7 +82,7 @@ az container create `
     --image $ACR_LOGINSERVER/azure-iaas-container:1.0 `
     --registry-login-server $ACR_LOGINSERVER `
     --registry-username georgeciachir `
-    --registry-password pjT1XmVWUN8L6IwPPXhTjsJ/+oUHwCTq
+    --registry-password the_password
 
 
 #################################################### Deploying a container using YAML
